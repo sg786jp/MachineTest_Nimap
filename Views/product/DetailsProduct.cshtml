@@ -1,0 +1,38 @@
+﻿@model MachineTest.Models.ViewModel
+@{
+    ViewData["Title"] = "DetailsProduct";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+           
+                <div class="card-body">
+                    <h2 class="text-info text-center m-1">Product Information</h2>
+                    <table class="text-center table table-bordered">
+                        <tr>
+                            <td>Product ID: </td><td class="text-info">@Model.productid</td>
+                        </tr>
+                        <tr>
+                            <td>Product Name: </td><td class="text-info">@Model.productname</td>
+                        </tr>
+                        <tr>
+                            <td>Category ID : </td><td class="text-info"><b>@Model.categoryid</b></td>
+                        </tr>
+                        <tr>
+                            <td>Category Name : </td>
+                            <td class="text-info"><b>@Model.categoryname</b></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-footer mt-2">
+                    <div class="d-grid gap-2">
+                        <a class="btn btn-sm m-2 p-2 btn-primary" asp-action="Index" asp-controller="product">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

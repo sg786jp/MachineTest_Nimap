@@ -1,0 +1,49 @@
+﻿@model MachineTest.Models.category
+@{
+    ViewData["Title"] = "addCategory";
+}
+
+<div class="container">
+    <div class="row">
+        <div class=" col-8 offset-2">
+            <div class="card">
+                <div class="card-header">
+                    @if (Model.categoryid == 0)
+                    {
+                        <h2 class="text-info text-center">Add Category</h2>
+                    }
+                    else{
+                         <h2 class="text-info text-center">Update Category</h2>
+                        }
+                    </div>
+            <div class="card-body">
+                <form method="post" asp-action="addCategory">
+                    
+                        <div class="form-group">
+                            <label asp-for="categoryname"></label>
+                            <input type="text" class="form-control" placeholder="Enter Category Name" autocomplete="off"
+                                   asp-for="categoryname" />
+                            <input type="hidden" asp-for="categoryid"/>
+                            <span class="text-danger" asp-validation-for="categoryname"></span>
+                            
+                        </div>
+                        <div >
+                            @if (Model.categoryid == 0)
+                            {
+                                <input type="submit" class=" btn btn-sm btn-primary" style="float:right" value="Add" />
+                            }else
+                            {
+                                <input type="submit" class=" btn btn-sm btn-primary" style="float:right" value="Update" />
+                            }
+                        </div>
+                </form>
+            </div>
+                <div class="card-footer mt-4">
+                    <div class="d-grid gap-2">
+                        <a class="btn btn-sm btn-warning p-2 m-2" asp-action="Index" asp-controller="category">Back</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>

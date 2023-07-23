@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MachineTest.Models.category> // Crud of Category
+@{
+   
+    ViewData["Title"] = "Index";
+   }
+
+<div class="float-right">
+    <a class="btn btn-sm btn-warning m-1 p-1" asp-action="addCategory" asp-controller="category">Add Category</a>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <p class="text-center text-success">@TempData["succes"]</p>
+            <table class="table table-bordered table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>Category ID</th>
+                        <th>Category Name</th>
+                        <th>Action</th>
+                    </tr>
+                   
+                </thead>
+                <tbody>
+                    @foreach (var d in Model)
+                    {
+                        <tr>
+                            <td>@d.categoryid</td>
+                            <td>@d.categoryname</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" asp-action="addCategory" asp-controller="category"
+                                   asp-route-id="@d.categoryid">Edit</a>
+                                <a class="btn btn-sm btn-warning" asp-action="Details" asp-controller="category"
+                                   asp-route-id="@d.categoryid">Details</a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete" onclick="return confirm('Are You Confirm to delete it ?')" 
+                                asp-controller="category"
+                                   asp-route-id="@d.categoryid">Delete</a>
+                            </td>
+                        </tr>
+                        
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

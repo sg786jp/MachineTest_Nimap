@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MachineTest.Models.ViewModel> // In this View Product and Category both display
+@{
+    ViewData["Title"] = "Index";
+    Pager pager = new Pager();
+    int pageNo = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div>
+                <a class="btn btn-sm btn-primary m-2 p-2" asp-action="addProduct" asp-controller="product">Add Product</a>
+            </div>
+            <h1 class="text-center text-primary">Products & Categories</h1>
+            <table class="table table-bordered text-center">
+                <thead class="bg-dark text-light">
+                    <tr>
+                        <th>productID</th>
+                        <th>productName</th>
+                        <th>categoryID</th>
+                        <th>categoryName</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in Model)
+                    {
+                        <tr>
+                            <td>@d.productid</td>
+                            <td>@d.productname</td>
+                            <td>@d.categoryid</td>
+                            <td>@d.categoryname</td>
+                                <td>
+                                <a class="btn btn-sm btn-primary" asp-action="EditProduct" asp-controller="product"
+                                       asp-route-id="@d.productid">Edit</a>
+                                    <a class="btn btn-sm btn-warning" asp-action="DetailsProduct" asp-controller="product"
+                                       asp-route-id="@d.productid">Details</a>
+                                    <a class="btn btn-sm btn-danger" asp-action="DeleteProduct" onclick="return confirm('Are you sure to delete this record')" 
+                                    asp-controller="product" asp-route-id="@d.productid">Delete</a>
+                                </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container">
+    @if (pager.TotalPages > 0)
+    {
+        <ul class="pagination justify-content-end">
+            @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+            {
+                <li class="page-item @(pge==pager.CurrentPage?"active":"")">
+                    <a class="page-link" asp-controller="product" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                </li>
+            }
+        </ul>
+    }
+
+
+</div>
+

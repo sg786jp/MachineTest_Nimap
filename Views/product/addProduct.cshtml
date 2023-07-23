@@ -1,0 +1,47 @@
+﻿@model MachineTest.Models.ViewModel
+@{
+    ViewData["Title"] = "addProduct";
+}
+<div class="container">
+    <div class="row">
+        <div class=" col-8 offset-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-info text-center">Add Product</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="addProduct" asp-controller="product">
+                        <div class="text-danger text-center" asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group">
+                            <label class="mb-1" asp-for="productname"></label>
+                            <input type="text" class="form-control" placeholder="Enter Product Name" autocomplete="off"
+                                   asp-for="productname" />
+                            <span class="text-danger" asp-validation-for="productname"></span>
+                        </div>
+                        
+                        <div class="form-group col-lg-6 mt-2">
+                            <label asp-for="categoryname"></label>
+                            <select asp-for="categoryid">
+                                <option value="0">---Select Category---</option>
+                                @foreach (var cat in ViewBag.category)
+                                {
+                                    <option value="@cat.categoryid">@cat.categoryname</option>
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <input type="submit" style="background-color: #8595ab;float:right" 
+                            class=" btn btn-sm btn-primary" value="Add" />
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer mt-4">
+                    <div class="d-grid gap-2">
+                        <a class="btn btn-sm btn-warning p-2 m-2" asp-action="Index" asp-controller="product">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
