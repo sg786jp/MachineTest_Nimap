@@ -1,7 +1,9 @@
 using MachineTest.Data;
 using MachineTest.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing.Printing;
 
 namespace MachineTest.Controllers
 {
@@ -13,7 +15,7 @@ namespace MachineTest.Controllers
         {
             this.context = context;
         }
-        public IActionResult Index(int pg = 1)
+        public IActionResult Index(int Pageindex = 1, int Pagesize = 5)
         {
             // Join
             var data = (from p in context.products
@@ -26,19 +28,20 @@ namespace MachineTest.Controllers
                             categoryid = p.categoryid,
                             categoryname = c.categoryname,
                         }).ToList();
-            const int pageSize = 3;
-            if (pg < 1)
-                pg = 1;
 
-            int recsCount = data.Count();
-            var pager = new Pager(recsCount, pg, pageSize);
-            int recSkip = (pg - 1) * pageSize;
-            var datas = data.Skip(recSkip).Take(pager.PageSize).ToList();
-            this.ViewBag.Pager = pager;
+            // Get the paged data and total record count using the stored procedure
+            var pagedData = context.GetPagedData(Pageindex, Pagesize, out int totalRecords);
+
+            // Calculate the total number of pages and store it in ViewBag
+            int totalPages = (int)Math.Ceiling(totalRecords / (double)Pageindex);
+            ViewBag.TotalPages = totalPages;
+            ViewBag.PageNumber = Pageindex;
+
+            return View(pagedData);
 
 
 
-            return View(datas);
+
         }
 
         public async Task<IActionResult> addProduct()

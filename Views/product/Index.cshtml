@@ -1,13 +1,7 @@
 ﻿@model IEnumerable<MachineTest.Models.ViewModel> // In this View Product and Category both display
 @{
     ViewData["Title"] = "Index";
-    Pager pager = new Pager();
-    int pageNo = 0;
-    if (ViewBag.Pager != null)
-    {
-        pager = ViewBag.Pager;
-        pageNo = pager.CurrentPage;
-    }
+   
 }
 
 <div class="container">
@@ -50,19 +44,20 @@
         </div>
     </div>
 </div>
+
 <div class="container">
-    @if (pager.TotalPages > 0)
-    {
+    
         <ul class="pagination justify-content-end">
-            @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+
+            @for (int i = 1; i <= ViewBag.totalPages; i++)
             {
-                <li class="page-item @(pge==pager.CurrentPage?"active":"")">
-                    <a class="page-link" asp-controller="product" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                <li class="page-item @(ViewBag.Pageindex == i ? "active" : "")">
+                    <a class="page-link" href="\product/Index?Pageindex=@i">@i</a>
                 </li>
             }
         </ul>
-    }
-
-
+    
 </div>
+
+
 

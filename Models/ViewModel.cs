@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MachineTest.Models
 {
+    public class ViewModel_product
+    {
+        public List<ViewModel> products { get; set; }
+        public int CureentIndex { get; set; }
+        public int PageCount { get; set; }
+    }
     public class ViewModel
     {
         [Key]
