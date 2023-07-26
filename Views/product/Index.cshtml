@@ -43,21 +43,21 @@
             </table>
         </div>
     </div>
-</div>
+
 
 <div class="container">
     
         <ul class="pagination justify-content-end">
 
-            @for (int i = 1; i <= ViewBag.totalPages; i++)
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
             {
                 <li class="page-item @(ViewBag.Pageindex == i ? "active" : "")">
-                    <a class="page-link" href="\product/Index?Pageindex=@i">@i</a>
+                    <a class="page-link" href="\product/Index?pageindex=@i">@i</a>
                 </li>
             }
         </ul>
     
 </div>
 
-
+</div>
 

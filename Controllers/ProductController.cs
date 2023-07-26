@@ -15,9 +15,9 @@ namespace MachineTest.Controllers
         {
             this.context = context;
         }
-        public IActionResult Index(int Pageindex = 1, int Pagesize = 5)
+        public IActionResult Index(int pageindex = 1, int Pagesize = 5)
         {
-            // Join
+            /*Join
             var data = (from p in context.products
                         join c in context.categories
                         on p.categoryid equals c.categoryid
@@ -28,14 +28,14 @@ namespace MachineTest.Controllers
                             categoryid = p.categoryid,
                             categoryname = c.categoryname,
                         }).ToList();
-
+            */
             // Get the paged data and total record count using the stored procedure
-            var pagedData = context.GetPagedData(Pageindex, Pagesize, out int totalRecords);
+            var pagedData = context.GetPagedData(pageindex, Pagesize, out int totalRecords);
 
             // Calculate the total number of pages and store it in ViewBag
-            int totalPages = (int)Math.Ceiling(totalRecords / (double)Pageindex);
+            int totalPages = (int)Math.Ceiling(totalRecords / (double)pageindex);
             ViewBag.TotalPages = totalPages;
-            ViewBag.PageNumber = Pageindex;
+            ViewBag.PageNumber = pageindex;
 
             return View(pagedData);
 

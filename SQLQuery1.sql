@@ -3,7 +3,7 @@
 Create proc SP_products_category
 @Pageindex int ,
 @Pagesize int ,
- @TotalRecords int output
+@TotalRecords int output
 as 
 begin
  SELECT @TotalRecords = COUNT(*)
@@ -22,3 +22,4 @@ order by p.productid asc Offset @Pagesize*(@Pageindex-1) Rows Fetch next @Pagesi
 Select Count(1) as totalcount from products
 
 end
+
