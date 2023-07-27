@@ -17,25 +17,13 @@ namespace MachineTest.Controllers
         }
         public IActionResult Index(int pageindex = 1, int Pagesize = 5)
         {
-            /*Join
-            var data = (from p in context.products
-                        join c in context.categories
-                        on p.categoryid equals c.categoryid
-                        select new ViewModel
-                        {
-                            productid = p.productid,
-                            productname = p.productname,
-                            categoryid = p.categoryid,
-                            categoryname = c.categoryname,
-                        }).ToList();
-            */
-            // Get the paged data and total record count using the stored procedure
+            
             var pagedData = context.GetPagedData(pageindex, Pagesize, out int totalRecords);
 
-            // Calculate the total number of pages and store it in ViewBag
+            
             int totalPages = (int)Math.Ceiling(totalRecords / (double)pageindex);
             ViewBag.TotalPages = totalPages;
-            ViewBag.PageNumber = pageindex;
+            ViewBag.Pageindex = pageindex;
 
             return View(pagedData);
 
